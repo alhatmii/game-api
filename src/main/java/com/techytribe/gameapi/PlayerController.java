@@ -1,6 +1,7 @@
 package com.techytribe.gameapi;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,10 @@ public class PlayerController {
     CopyOnWriteArrayList <Player> listOfPlayers = new CopyOnWriteArrayList<>();
 //To create game we use post mapping
     @PostMapping
-    public Player createPlayer(Player incomingPlayer){
+    //sbringboot do not know which data use to make it player object so
+    // use @RequsetBodey whenever you receive request you have to check the body
+    // now sbringboot will convert that string into player "deserialization"
+    public Player createPlayer(@RequestBody Player incomingPlayer){
         listOfPlayers.add(incomingPlayer);
         return incomingPlayer;
 
