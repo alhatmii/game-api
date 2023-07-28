@@ -1,10 +1,8 @@
 package com.techytribe.gameapi;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @RestController
@@ -21,6 +19,30 @@ public class PlayerController {
     public Player createPlayer(@RequestBody Player incomingPlayer){
         listOfPlayers.add(incomingPlayer);
         return incomingPlayer;
+
+    }
+    // we want to get all the players
+    @GetMapping
+    public List <Player> getAllPlayers(){
+        return listOfPlayers;
+    }
+    // how we get specific player
+    @GetMapping(path ="/{id}")// So that sbringboot will not confuse
+    // we should write pathVariable to get the id otherwise will get null
+    public Player getSpecificPlayer(@PathVariable String id){
+        //this is another logic
+        //Player newPlayer = new Player();
+        //newPlayer.id = id;
+        //return newPlayer;
+        // here we will write our logic how to get specific player
+        //filter() will check the condition
+        Player existingPlayer = listOfPlayers.stream().filter(
+                (currPlayer) -> {
+            return currPlayer.id.equals(id);
+               }
+        ).findFirst().get();
+        
+        return null;
 
     }
 }
