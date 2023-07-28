@@ -41,8 +41,17 @@ public class PlayerController {
             return currPlayer.id.equals(id);
                }
         ).findFirst().get();
-        
+
         return null;
+
+    }
+    // how to update player, its combination of get and post, kind of recreated
+    @PutMapping(path = "/{id}")
+
+    public Player updateSpecificPlayer(@PathVariable String id,@RequestBody Player incomingPlayer){
+        Player existingPlayer = getSpecificPlayer(id);
+        existingPlayer.name = incomingPlayer.name;
+        return existingPlayer;
 
     }
 }
