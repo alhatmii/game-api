@@ -7,6 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @RestController
 @RequestMapping(path = "/api/v1/player")
+@CrossOrigin("*")
 public class PlayerController {
     // We use this type of list to handel multiple request, create duplicate of list, put data in different list then
     //marge it
